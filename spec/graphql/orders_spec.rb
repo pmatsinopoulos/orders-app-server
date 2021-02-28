@@ -6,6 +6,8 @@ RSpec.describe 'GET orders list', type: :request do
         orders {
           code
           id
+          product
+          price
         }
       }
     STR
@@ -28,7 +30,7 @@ RSpec.describe 'GET orders list', type: :request do
     response_decoded = ActiveSupport::JSON.decode(response.body)
 
     orders_returned = response_decoded['data']['orders']
-    expected_orders = ::Order.order(:id).to_a.map { |o| { 'id' => o.id, 'code' => o.code } }
+    expected_orders = ::Order.order(:id).to_a.map { |o| { 'id' => o.id, 'code' => o.code, 'product' => o.product, 'price' => o.price } }
 
     expect(orders_returned).to match_array(expected_orders)
   end

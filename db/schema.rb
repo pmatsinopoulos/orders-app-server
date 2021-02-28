@@ -17,6 +17,8 @@ ActiveRecord::Schema.define(version: 2021_02_27_053453) do
 
   create_table "orders", force: :cascade do |t|
     t.string "code", null: false
+    t.string "product", null: false
+    t.decimal "price", default: "0.0", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["code"], name: "index_orders_on_code", unique: true
