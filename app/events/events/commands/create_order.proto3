@@ -1,0 +1,6 @@
+syntax = "proto3";
+package events.commands;
+
+message CreateOrder {
+  string code = 1;
+}

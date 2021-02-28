@@ -36,5 +36,9 @@ module OrdersAppServer
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    config.event_store = RailsEventStore::Client.new(
+      mapper: RubyEventStore::Mappers::Protobuf.new
+    )
+    config.active_job.queue_adapter = :delayed_job
   end
 end

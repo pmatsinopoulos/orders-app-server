@@ -22,8 +22,12 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
-  <<: *default
-  database: orders_app_server_development
+  primary:
+    <<: *default
+    database: orders_app_server_development
+  event_store:
+    <<: *default
+    database: events_server_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
