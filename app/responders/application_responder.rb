@@ -1,11 +1,16 @@
 # frozen_string_literal: true
 
-# Application responder from which all Karafka responders should inherit
-# You can rename it if it would conflict with your current code base (in case you're integrating
-# Karafka with other frameworks)
 class ApplicationResponder < Karafka::BaseResponder
-  # This method needs to be implemented in each of the responders
-  # def respond(data)
-  #   respond_to :topic, data.to_json
-  # end
+  def post_response(data)
+    request = Typhoeus::Request.new(
+      'http://localhost:3002/events',
+      method: :post,
+      body: ActiveSupport::JSON.encode(data),
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    )
+    request.run
+  end
 end
