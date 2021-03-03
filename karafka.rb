@@ -43,8 +43,12 @@ class KarafkaApp < Karafka::App
   # )
 
   consumer_groups.draw do
-    topic :events do
-      consumer ::EventsConsumer
+    topic :events_commands do
+      consumer ::Commands::EventsConsumer
+    end
+
+    topic :events_facts do
+      consumer ::Facts::EventsConsumer
     end
 
     # consumer_group :bigger_group do
