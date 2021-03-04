@@ -7,7 +7,7 @@ module Facts
       ActionCable.server.broadcast(
         'application_messages',
         {
-          type: 'NEW_ORDER_CREATED',
+          type: 'ORDER_CREATED',
           order: {
             id: order.id,
             code: order.code,
