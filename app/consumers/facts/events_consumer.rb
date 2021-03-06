@@ -3,16 +3,16 @@ module Facts
     private
 
     def consume
-      order = Order.find_by_code! params.payload['data']['code']
+      order_details = params.payload['data']
       ActionCable.server.broadcast(
         'application_messages',
         {
           type: 'ORDER_CREATED',
           order: {
-            id: order.id,
-            code: order.code,
-            product: order.product,
-            price: order.price
+            id: order_details['id'],
+            code: order_details['code'],
+            product: order_details['product'],
+            price: order_details['price']
          }
         }
       )
